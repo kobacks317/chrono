@@ -356,7 +356,7 @@
 
         function adjustZoom() {
             let scaleFactor = 1;
-            if (window.innerHeight > window.innerWidth*2.5) {
+            if (window.innerHeight > window.innerWidth*2) {
                 scaleFactor = window.innerWidth / 300;
                 document.getElementById('chrono').style.flexDirection = "column";
             } else {
