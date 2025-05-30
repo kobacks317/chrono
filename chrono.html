@@ -1,0 +1,370 @@
+<html>
+
+<body>
+
+
+<div class="chrono" id="chrono">
+    <style>
+        .chrono {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 0px;
+            height: 200px;
+            place-content: center;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px;
+        }
+        .clock {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .stopwatch {
+            font-size: 24px;
+            color: grey;
+        }
+        .timer-detail {
+            width: 100%;
+            place-items: stretch;
+            font-size: 8px;
+            line-height: 0px;
+            margin-bottom: 4px;
+        }
+        .analog-clock {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 5px solid #333;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .hand {
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            border-radius: 2px;
+            background: #333;
+            top: 50%;
+            left: 50%;
+            translate: 0 -50%;
+            transform-origin: left center;
+            transform: rotate(270deg);
+            transition-duration: 0.2s;
+        }
+        .hand-bold {
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            border-radius: 4px;
+            background: #333;
+            top: 50%;
+            left: 50%;
+            translate: 0 -50%;
+            transform-origin: left center;
+            transform: rotate(270deg);
+            transition-duration: 0.2s;
+        }
+        .secChrono {
+            position: absolute;
+            width: 93%;
+            height: 93%;
+            border-radius: 50%;
+            background: none;
+            position-area: center;
+            text-align: center;
+            color: blue;
+            font-size: 8px;
+            line-height: 20px;
+        }
+        .center {
+            position: absolute;
+            width: 5%;
+            height: 5%;
+            border-radius: 50%;
+            background: black;
+            position-area: center;
+        }
+        .guage {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position-area: center;
+            background: radial-gradient(circle closest-side, white 90%, transparent 90%),repeating-conic-gradient(black 0deg 1deg, transparent 1deg 29deg, black 20deg 30deg);
+        }
+
+        #second-hand {
+            height: 1x;
+            background: red;
+        }
+        #stopwatch-second-hand {
+            height: 1px;
+            background: blue;
+        }
+        .progress-container {
+            display: flex;
+            align-items: center;
+        }
+        progress {
+            width: 150px;
+            height: 20px;
+            transition-duration: 0.2s;
+        }
+        .button-container {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+            align-items: center;
+        }
+        .adjust-buttons {
+            display: flex;
+            flex-direction: column; /* 縦並びに */
+            align-items: center;
+        }
+        .small-button {
+            font-size: 11px;
+            line-height: 13px;
+            width: 30px;
+            height: 14px; /* 縦半分のサイズ */
+            margin: 0px;
+        }
+        .max-time-display {
+            font-size: 12px;
+        }
+        button {
+            font-size: 10px;
+            width: 30px;
+            height: 28px;
+            cursor: pointer;
+            border: 1px solid #333;
+            background: white;
+            padding: 0;
+        }
+    </style>
+
+    <div class="column">
+        <div class="analog-clock" id="analog-clock" onclick="startChrono()">
+            <div class="guage"></div>
+            <div class="secChrono" id="secChrono"></div>
+            <div class="hand" id="stopwatch-second-hand" style="height: 0.5px;"></div>
+            <div class="hand" id="second-hand"  style="height: 1px;"></div>
+            <div class="hand" id="minute-hand"  style="height: 2px;"></div>
+            <div class="hand-bold" id="hour-hand" style="height: 4px; width: 30%;"></div>
+            <div class="center"></div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="clock" id="clock">00:00:00</div>
+        <div class="stopwatch" id="stopwatch">00:00:00</div>
+        
+        <div class="progress-container">
+            <progress id="progress-bar" value="0" max="600"></progress>
+        </div>
+
+        <div class="timer-detail">
+            <table class="timer-detail"><tr>
+                <td id="start-time" style="text-align: left;"></td>
+                <td id="max-time-display" style="text-align: center;">10min</td>
+                <td id="end-time" style="text-align: right;"></td>
+            </tr></table>
+        </div>
+
+        <div class="button-container">
+            <button onclick="startStopwatch(true)">&gt;&gt;</button>
+            <button onclick="stopStopwatch()">&gt;||</button>
+            <button onclick="resetStopwatch()">↻</button>
+            <div class="adjust-buttons">
+                <button class="small-button" onclick="adjustTime(5)">+</button>
+                <button class="small-button" onclick="adjustTime(-5)" style="border-top:none;font-size:15px">-</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let stopwatchSeconds = 0;
+        let stopwatchMinutes = 0;
+        let stopwatchHours = 0;
+        let running = false;
+        let chronoRunning = false;
+        let startDate = new Date();
+        let pauseDate = new Date();
+        let chronoDate = new Date();
+        let maxTime = 600;
+
+        function adjustTime(minutes) {
+            if (maxTime + minutes <= 300) {
+                minutes = minutes/5;
+            }
+            maxTime = Math.max(60, maxTime + minutes * 60);
+            document.getElementById('progress-bar').max = maxTime;
+            document.getElementById('max-time-display').textContent = `${maxTime / 60}min`;
+            if (stopwatchHours == 0 && stopwatchMinutes == 0 && stopwatchSeconds == 0) {
+                startDate = new Date();
+            }
+            setAnalogClockMarker(true);
+        }
+
+        function updateClockAndStopwatch() {
+            const now = new Date();
+            const hours = now.getHours() % 12;
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            document.getElementById('clock').textContent = 
+                `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+            document.getElementById('hour-hand').style.transform = `rotate(${(hours * 30) + (minutes / 2) + 270}deg)`;
+            document.getElementById('minute-hand').style.transform = `rotate(${hours*360 + minutes * 6 + seconds /10 + 270}deg)`;
+            document.getElementById('second-hand').style.transform = `rotate(${hours*360 + minutes * 360 + seconds * 6 + 270}deg)`;
+
+            updateChrono();
+
+            if (running) {
+                let elapsed = (new Date() - startDate) / 1000;
+                stopwatchSeconds = Math.floor(elapsed%60);
+                stopwatchMinutes = Math.floor(elapsed/60%60);
+                stopwatchHours = Math.floor(elapsed/3600);
+
+                document.getElementById('stopwatch').textContent = 
+                    `${String(stopwatchHours).padStart(2, '0')}:${String(stopwatchMinutes).padStart(2, '0')}:${String(stopwatchSeconds).padStart(2, '0')}`;
+
+                if (elapsed <= maxTime) {
+                    document.getElementById('progress-bar').value = elapsed;
+                    setStopwatchColor("black");
+                } else {
+                    document.getElementById('progress-bar').value = elapsed % maxTime;
+                    setStopwatchColor("red");
+                }
+            }
+        }
+
+        setInterval(updateClockAndStopwatch, 1000);
+
+        function startStopwatch(chrono=false) {
+            running = true;
+            startDate = new Date();
+            setAnalogClockMarker(true);
+            updateClockAndStopwatch();
+            if (chrono) {
+                startChrono(true);
+            }
+        }
+
+        function stopStopwatch() {
+            if (running) {
+                running = false;
+                pauseDate = new Date();
+                setStopwatchColor("grey");
+            } else {
+                running = true;
+                if (stopwatchHours == 0 && stopwatchMinutes == 0 && stopwatchSeconds == 0) {
+                    startStopwatch();
+                } else {
+                    startDate.setTime(startDate.getTime() + (new Date() - pauseDate));
+                    setAnalogClockMarker(true);
+                }
+                updateClockAndStopwatch();
+            }
+        }
+
+        function setStopwatchColor(color) {
+            document.getElementById('stopwatch').style.color = color;
+        }
+
+        function resetStopwatch() {
+            running = false;
+            stopwatchSeconds = 0;
+            stopwatchMinutes = 0;
+            stopwatchHours = 0;
+            document.getElementById('stopwatch').textContent = "00:00:00";
+            document.getElementById('progress-bar').value = 0;
+            setAnalogClockMarker(false);
+            setStopwatchColor("grey");
+        }
+
+        function startChrono(force=false) {
+             if (chronoRunning && !force) {
+                 chronoRunning = false;
+                 updateChrono();
+             } else {
+                 chronoDate = new Date();
+                 chronoRunning = true;
+                 updateChrono();
+             }
+        }
+
+        function updateChrono() {
+            if (chronoRunning) {
+                let start = Math.floor(chronoDate/1000)*6%360;
+                let end = Math.floor((new Date() - chronoDate)/1000)*6%360;
+                let col1 = "white";
+                let col2 = "rgb(230, 230, 255)";
+                let col3 = "white";
+                //document.getElementById('secChrono').style.background = `conic-gradient(${col1} 0deg, ${col1} ${0}deg, ${col2} ${0}deg, ${col3} ${end}deg, ${col1} ${end}deg)`;
+                document.getElementById('secChrono').textContent = Math.floor((new Date() - chronoDate)/60000);
+                document.getElementById('stopwatch-second-hand').style.transform = `rotate(${Math.floor((new Date() - chronoDate)/1000)*6 + 270}deg)`;
+            } else {
+                //document.getElementById('secChrono').style.background = "white";
+                document.getElementById('secChrono').textContent = "";
+                document.getElementById('stopwatch-second-hand').style.transform = "rotate(270deg)";
+            }
+        }
+
+        function setAnalogClockMarker(display) {
+            if (display) {
+                let start = ((startDate.getMinutes() + startDate.getSeconds()/60) * 6)%360;
+                let end = ((startDate.getMinutes() + startDate.getSeconds()/60 + maxTime/60) * 6)%360;
+                let bg = "transparent";
+                let col1 = "transparent";
+                let col2 = "skyblue";
+
+                document.getElementById('start-time').textContent = `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}:${String(startDate.getSeconds()).padStart(2, '0')}`;
+
+                let endDate = new Date(startDate);
+                endDate.setSeconds(endDate.getSeconds() + maxTime);
+                document.getElementById('end-time').textContent = `${String(endDate.getHours()).padStart(2, '0')}:${String(endDate.getMinutes()).padStart(2, '0')}:${String(endDate.getSeconds()).padStart(2, '0')}`;
+                
+
+                if (maxTime > 3600) {
+                    col1 = "lightgrey";
+                } else if (maxTime%3600 == 0) {
+                    col1 = "skyblue";
+                    col2 = "black";
+                    start = start - 1;
+                    end = start + 1;
+                }
+                if (start < end) {
+                    document.getElementById('analog-clock').style.background = `radial-gradient(circle closest-side, ${bg} 93%, rgba(255, 255, 255, 0) 93%, 100%, rgb(255, 255, 255) 90%), conic-gradient(${col1} 0deg, ${col1} ${start}deg, ${col2} ${start}deg, ${col2} ${end}deg, ${col1} ${end}deg)`;
+                } else {
+                    console.log("reversed");
+                    document.getElementById('analog-clock').style.background = `radial-gradient(circle closest-side, ${bg} 93%, rgba(255, 255, 255, 0) 93%, 100%, rgb(255, 255, 255) 90%), conic-gradient(${col2} 0deg, ${col2} ${end}deg, ${col1} ${end}deg, ${col1} ${start}deg, ${col2} ${start}deg)`;
+                }
+            } else {
+                document.getElementById('analog-clock').style.background = "none";
+                document.getElementById('start-time').textContent = "";
+                document.getElementById('end-time').textContent = "";
+            }
+        }
+
+        function adjustZoom() {
+            const scaleFactor = window.innerWidth / 420; // 基準幅 1200px に対するスケール
+            document.getElementById('chrono').style.zoom = `${scaleFactor}`;
+
+        }
+
+        window.addEventListener('resize', adjustZoom);
+        window.addEventListener('load', adjustZoom);
+
+
+    </script>
+</div>
+
+</body>
+</html>
