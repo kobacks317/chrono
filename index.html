@@ -167,7 +167,6 @@
             }
             .analog-clock {
                 border-color: white;
-                opacity: 50%;
             }
             button {
                 background: black;
@@ -370,6 +369,9 @@
                 let bg = "transparent";
                 let col1 = "transparent";
                 let col2 = "skyblue";
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    col2 = "blue";
+                }
 
                 document.getElementById('start-time').textContent = `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}:${String(startDate.getSeconds()).padStart(2, '0')}`;
 
