@@ -5,8 +5,13 @@
 
 <div class="chrono" id="chrono">
     <style>
-        body {
-            background-color: light-dark(white, black);
+        @media (prefers-color-scheme: dark) {
+            /* このなかにダークモード時のスタイルを記述します */
+            body {
+                background-color: black;
+                color: white;
+            }
+        
         }
         .chrono {
             font-family: Arial, sans-serif;
@@ -16,7 +21,6 @@
             gap: 0px;
             height: 200px;
             place-content: center;
-            background: light-dark(white, black);
         }
         .column {
             display: flex;
