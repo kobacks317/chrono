@@ -19,6 +19,7 @@
             flex-direction: column;
             align-items: center;
             margin: 5px;
+            width: 150px;
         }
         .clock {
             font-size: 32px;
@@ -354,9 +355,14 @@
         }
 
         function adjustZoom() {
-            const scaleFactor = window.innerWidth / 415; // 基準幅 1200px に対するスケール
+            if (window.innerHeight*2 > window.innerWidth) {
+                const scaleFactor = window.innerWidth / 200; // 基準幅 1200px に対するスケール
+                document.getElementById('chrono').style.flex-direction = "column";
+            } else {
+                const scaleFactor = window.innerWidth / 400; // 基準幅 1200px に対するスケール
+                document.getElementById('chrono').style.flex-direction = "row";
+            }
             document.getElementById('chrono').style.zoom = `${scaleFactor}`;
-
         }
 
         window.addEventListener('resize', adjustZoom);
