@@ -355,11 +355,12 @@
         }
 
         function adjustZoom() {
+            const scaleFactor = 1;
             if (window.innerHeight*2 > window.innerWidth) {
-                const scaleFactor = window.innerWidth / 200; // 基準幅 1200px に対するスケール
+                scaleFactor = window.innerWidth / 200; // 基準幅 1200px に対するスケール
                 document.getElementById('chrono').style.flexDirection = "column";
             } else {
-                const scaleFactor = window.innerWidth / 400; // 基準幅 1200px に対するスケール
+                scaleFactor = window.innerWidth / 400; // 基準幅 1200px に対するスケール
                 document.getElementById('chrono').style.flexDirection = "row";
             }
             document.getElementById('chrono').style.zoom = `${scaleFactor}`;
