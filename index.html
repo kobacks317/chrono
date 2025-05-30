@@ -359,9 +359,11 @@
             if (window.innerHeight > window.innerWidth*2) {
                 scaleFactor = window.innerWidth / 300;
                 document.getElementById('chrono').style.flexDirection = "column";
+                document.getElementById('chrono').style.height = "400px";
             } else {
                 scaleFactor = window.innerWidth / 400;
                 document.getElementById('chrono').style.flexDirection = "row";
+                document.getElementById('chrono').style.height = "200px";
             }
             document.getElementById('chrono').style.zoom = `${scaleFactor}`;
         }
