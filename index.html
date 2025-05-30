@@ -257,7 +257,7 @@
 
                 if (elapsed <= maxTime) {
                     document.getElementById('progress-bar').value = elapsed;
-                    setStopwatchColor("black");
+                    setStopwatchColor("unset");
                 } else {
                     document.getElementById('progress-bar').value = elapsed % maxTime;
                     setStopwatchColor("red");
