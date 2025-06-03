@@ -20,6 +20,7 @@
             align-items: center;
             gap: 0px;
             height: 200px;
+            width: 400px;
             place-content: center;
         }
         .column {
@@ -407,11 +408,11 @@
         function adjustZoom() {
             let scaleFactor = 1;
             if (window.innerHeight > window.innerWidth*1.4) {
-                scaleFactor = window.innerWidth / 200;
+                scaleFactor = min(window.innerWidth / 200, window.innerHeight / 400);
                 document.getElementById('chrono').style.flexDirection = "column";
                 document.getElementById('chrono').style.height = "400px";
             } else {
-                scaleFactor = window.innerWidth / 400;
+                scaleFactor = min(window.innerWidth / 400, window.innerHeight / 200);
                 document.getElementById('chrono').style.flexDirection = "row";
                 document.getElementById('chrono').style.height = "200px";
             }
