@@ -408,13 +408,15 @@
         function adjustZoom() {
             let scaleFactor = 1;
             if (window.innerHeight > window.innerWidth*1.4) {
-                scaleFactor = min(window.innerWidth / 200, window.innerHeight / 400);
+                scaleFactor = Math.min(window.innerWidth / 200, window.innerHeight / 400);
                 document.getElementById('chrono').style.flexDirection = "column";
-                document.getElementById('chrono').style.height = "400px";
+                document.getElementById('chrono').style.height = window.innerHeight;
+                document.getElementById('chrono').style.width = window.innerWidth;
             } else {
-                scaleFactor = min(window.innerWidth / 400, window.innerHeight / 200);
+                scaleFactor = Math.min(window.innerWidth / 400, window.innerHeight / 200);
                 document.getElementById('chrono').style.flexDirection = "row";
-                document.getElementById('chrono').style.height = "200px";
+                document.getElementById('chrono').style.height = window.innerHeight;
+                document.getElementById('chrono').style.width = window.innerWidth;
             }
             document.getElementById('chrono').style.zoom = `${scaleFactor}`;
         }
