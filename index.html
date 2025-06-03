@@ -414,7 +414,7 @@
 
         function adjustZoom() {
             let scaleFactor = 1;
-            let height = window.innerHeight - getComputedStyle(document.documentElement).getPropertyValue('--safeAreaInsetTop');
+            let height = window.innerHeight - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safeAreaInsetTop'));
             if (window.innerHeight > window.innerWidth*1.4) {
                 scaleFactor = Math.min(window.innerWidth / 200, height / 400);
                 document.getElementById('chrono').style.flexDirection = "column";
