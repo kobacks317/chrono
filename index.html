@@ -25,10 +25,11 @@
             height: 200px;
             width: 400px;
             position: absolute;
-/*             top: 50%; */
-            top: calc(50% + env(safe-area-inset-top));
+            top: 50%;
+/*             top: calc(50% + env(safe-area-inset-top)); */
             left: 50%;
             translate: -50% -50%;
+            padding-top: env(safe-area-inset-top);
         }
         .column {
             display: flex;
@@ -414,7 +415,8 @@
 
         function adjustZoom() {
             let scaleFactor = 1;
-            let height = window.innerHeight - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safeAreaInsetTop'));
+            let height = window.innerHeight;
+            // let height = window.innerHeight - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safeAreaInsetTop'));
             if (window.innerHeight > window.innerWidth*1.4) {
                 scaleFactor = Math.min(window.innerWidth / 200, height / 400);
                 document.getElementById('chrono').style.flexDirection = "column";
