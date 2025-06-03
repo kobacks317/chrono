@@ -10,6 +10,9 @@
 
 <div class="chrono" id="chrono">
     <style>
+        :root {
+            --safeAreaInsetTop: env(safe-area-inset-top);
+        }
         html, body {
             overflow: hidden; /* スクロールを無効にする */
         }
@@ -22,8 +25,8 @@
             height: 200px;
             width: 400px;
             position: absolute;
-            top: 50%;
-/*             top: calc(50% + env(safe-area-inset-top)); */
+/*             top: 50%; */
+            top: calc(50% + env(safe-area-inset-top));
             left: 50%;
             translate: -50% -50%;
         }
@@ -411,13 +414,14 @@
 
         function adjustZoom() {
             let scaleFactor = 1;
+            let height = window.innerHeight - getComputedStyle(document.documentElement).getPropertyValue('--safeAreaInsetTop');
             if (window.innerHeight > window.innerWidth*1.4) {
-                scaleFactor = Math.min(window.innerWidth / 200, window.innerHeight / 400);
+                scaleFactor = Math.min(window.innerWidth / 200, height / 400);
                 document.getElementById('chrono').style.flexDirection = "column";
                 document.getElementById('chrono').style.height = "400px";
                 document.getElementById('chrono').style.width = "200px";
             } else {
-                scaleFactor = Math.min(window.innerWidth / 400, window.innerHeight / 200);
+                scaleFactor = Math.min(window.innerWidth / 400, height / 200);
                 document.getElementById('chrono').style.flexDirection = "row";
                 document.getElementById('chrono').style.height = "200px";
                 document.getElementById('chrono').style.width = "400px";
