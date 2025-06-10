@@ -123,7 +123,7 @@
             background: radial-gradient(circle closest-side, white 90%, transparent 90%),repeating-conic-gradient(black 0deg 1deg, transparent 1deg 29deg, black 20deg 30deg);
         }
         .time-input {
-            font-size: 5px;
+            font-size: 4px;
             width: 100%;
         }
 
@@ -266,10 +266,15 @@
         let maxTime = 900;
 
         function adjustTime(minutes) {
-            if (maxTime + minutes <= 300) {
-                minutes = minutes/5;
+            if (minutes == 0) {
+                const d = document.getElementById('max-time-display').valueAsDate;
+                maxTime = d.getHours()*3600 + d.getMinutes()*60;
+            } else {
+                if (maxTime + minutes <= 300) {
+                    minutes = minutes/5;
+                }
+                maxTime = Math.max(60, maxTime + minutes * 60);
             }
-            maxTime = Math.max(60, maxTime + minutes * 60);
             document.getElementById('progress-bar').max = maxTime;
             document.getElementById('max-time-display').value = `${String(Math.floor(maxTime/3600)).padStart(2, '0')}:${String(Math.floor(maxTime/60)).padStart(2, '0')}`;
             if (stopwatchHours == 0 && stopwatchMinutes == 0 && stopwatchSeconds == 0) {
@@ -313,6 +318,9 @@
         }
 
         setInterval(updateClockAndStopwatch, 1000);
+        document.getElementById('max-time-display').addEventListener("change", (event) => {
+            adjustTime(0);
+        });
 
         function startStopwatch(chrono=false) {
             running = true;
