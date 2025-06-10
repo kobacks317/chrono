@@ -259,6 +259,7 @@
         let stopwatchMinutes = 0;
         let stopwatchHours = 0;
         let running = false;
+        let countdown = false;
         let chronoRunning = false;
         let startDate = new Date();
         let pauseDate = new Date();
@@ -301,20 +302,31 @@
 
             if (running) {
                 let elapsed = 0;
+                let sign = "";
                 if (now > startDate) {
-                    elapsed = (now - startDate) / 1000;
+                    if (countdown) {
+                        if (elapsed <= maxTime) {
+                            elapsed = (endDate - now) / 1000;
+                            sign = "-";
+                        } else {
+                            elapsed = (now - endDate) / 1000;
+                            sign = "+";
+                        }
+                    } else {
+                        elapsed = (now - startDate) / 1000;
+                    }
                 } else {
                     elapsed = (startDate - now) / 1000;
+                    sign = "-";
                 }
                 stopwatchSeconds = Math.floor(elapsed%60);
                 stopwatchMinutes = Math.floor(elapsed/60%60);
                 stopwatchHours = Math.floor(elapsed/3600);
 
                 document.getElementById('stopwatch').textContent = 
-                    `${String(stopwatchHours).padStart(2, '0')}:${String(stopwatchMinutes).padStart(2, '0')}:${String(stopwatchSeconds).padStart(2, '0')}`;
+                    `${sign} ${String(stopwatchHours).padStart(2, '0')}:${String(stopwatchMinutes).padStart(2, '0')}:${String(stopwatchSeconds).padStart(2, '0')}`;
 
                 if (startDate > now) {
-                    document.getElementById('stopwatch').textContent = "-" + document.getElementById('stopwatch').textContent;
                     document.getElementById('progress-bar').value = 0;
                     setStopwatchColor("grey");
                 } else if (elapsed <= maxTime) {
@@ -374,6 +386,11 @@
                 }
                 updateClockAndStopwatch();
             }
+        }
+
+        function toggleCountdown() {
+            countdown = !countdown;
+            updateClockAndStopwatch();
         }
 
         function setStopwatchColor(color) {
