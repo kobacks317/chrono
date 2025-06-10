@@ -235,7 +235,7 @@
                     <input id="start-time" type="time" class="time-input" />
                 </td>
                 <td style="text-align: center;">
-                    <input id="max-time-display" type="time" class="time-input" />
+                    <input id="max-time-display" type="time" class="time-input" value="00:15"/>
                 </td>
                 <td style="text-align: right;">
                     <input id="end-time" type="time" class="time-input" />
@@ -263,7 +263,7 @@
         let startDate = new Date();
         let pauseDate = new Date();
         let chronoDate = new Date();
-        let maxTime = 600;
+        let maxTime = 900;
 
         function adjustTime(minutes) {
             if (maxTime + minutes <= 300) {
@@ -271,7 +271,7 @@
             }
             maxTime = Math.max(60, maxTime + minutes * 60);
             document.getElementById('progress-bar').max = maxTime;
-            document.getElementById('max-time-display').value = `${String(String(Math.floor(maxTime/3600)).padStart(2, '0')}:${String(Math.floor(maxTime/60)).padStart(2, '0')}`;
+            document.getElementById('max-time-display').value = `${String(Math.floor(maxTime/3600)).padStart(2, '0')}:${String(Math.floor(maxTime/60)).padStart(2, '0')}`;
             if (stopwatchHours == 0 && stopwatchMinutes == 0 && stopwatchSeconds == 0) {
                 startDate = new Date();
             }
