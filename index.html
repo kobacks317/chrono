@@ -303,6 +303,8 @@
             if (running) {
                 let elapsed = 0;
                 let sign = "";
+                let endDate = new Date(startDate);
+                endDate.setSeconds(endDate.getSeconds() + maxTime);
                 if (now > startDate) {
                     if (countdown) {
                         if (elapsed <= maxTime) {
