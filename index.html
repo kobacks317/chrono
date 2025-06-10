@@ -123,7 +123,7 @@
             background: radial-gradient(circle closest-side, white 90%, transparent 90%),repeating-conic-gradient(black 0deg 1deg, transparent 1deg 29deg, black 20deg 30deg);
         }
         .time-input {
-            font-size: 6px;
+            font-size: 5px;
             width: 100%;
         }
 
@@ -271,7 +271,7 @@
             }
             maxTime = Math.max(60, maxTime + minutes * 60);
             document.getElementById('progress-bar').max = maxTime;
-            document.getElementById('max-time-display').value = `0:${maxTime / 60}`;
+            document.getElementById('max-time-display').value = `${String(String(Math.floor(maxTime/3600)).padStart(2, '0')}:${String(Math.floor(maxTime/60)).padStart(2, '0')}`;
             if (stopwatchHours == 0 && stopwatchMinutes == 0 && stopwatchSeconds == 0) {
                 startDate = new Date();
             }
