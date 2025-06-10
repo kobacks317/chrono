@@ -268,7 +268,7 @@
         function adjustTime(minutes) {
             if (minutes == 0) {
                 const d = document.getElementById('max-time-display').valueAsDate;
-                maxTime = d.getHours()*3600 + d.getMinutes()*60;
+                maxTime = d.getUTCHours()*3600 + d.getUTCMinutes()*60;
             } else {
                 if (maxTime + minutes <= 300) {
                     minutes = minutes/5;
