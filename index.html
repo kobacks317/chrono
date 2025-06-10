@@ -332,7 +332,11 @@
                     document.getElementById('progress-bar').value = 0;
                     setStopwatchColor("grey");
                 } else if (elapsed <= maxTime) {
-                    document.getElementById('progress-bar').value = elapsed;
+                    if (countdown) {
+                        document.getElementById('progress-bar').value = maxTime - elapsed;
+                    } else {
+                        document.getElementById('progress-bar').value = elapsed;
+                    }
                     setStopwatchColor("unset");
                 } else {
                     document.getElementById('progress-bar').value = maxTime;
