@@ -122,6 +122,10 @@
             position-area: center;
             background: radial-gradient(circle closest-side, white 90%, transparent 90%),repeating-conic-gradient(black 0deg 1deg, transparent 1deg 29deg, black 20deg 30deg);
         }
+        .time-input {
+            font-size: 6px;
+            width: 100%;
+        }
 
         #second-hand {
             height: 1x;
@@ -227,9 +231,15 @@
 
         <div class="timer-detail">
             <table class="timer-detail"><tr>
-                <td id="start-time" style="text-align: left;"></td>
-                <td id="max-time-display" style="text-align: center;">10min</td>
-                <td id="end-time" style="text-align: right;"></td>
+                <td style="text-align: left;">
+                    <input id="start-time" class="time-input" />
+                </td>
+                <td style="text-align: center;">
+                    <input id="max-time-display" class="time-input" />
+                </td>
+                <td style="text-align: right;">
+                    <input id="end-time" class="time-input" />
+                </td>
             </tr></table>
         </div>
 
@@ -261,7 +271,7 @@
             }
             maxTime = Math.max(60, maxTime + minutes * 60);
             document.getElementById('progress-bar').max = maxTime;
-            document.getElementById('max-time-display').textContent = `${maxTime / 60}min`;
+            document.getElementById('max-time-display').value = `0:${maxTime / 60}`;
             if (stopwatchHours == 0 && stopwatchMinutes == 0 && stopwatchSeconds == 0) {
                 startDate = new Date();
             }
@@ -385,11 +395,15 @@
                     col2 = "blue";
                 }
 
-                document.getElementById('start-time').textContent = `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}:${String(startDate.getSeconds()).padStart(2, '0')}`;
+                
+                document.getElementById('start-time').visibility = "visible";
+                document.getElementById('end-time').visibility = "visible";
+
+                document.getElementById('start-time').value = `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}:${String(startDate.getSeconds()).padStart(2, '0')}`;
 
                 let endDate = new Date(startDate);
                 endDate.setSeconds(endDate.getSeconds() + maxTime);
-                document.getElementById('end-time').textContent = `${String(endDate.getHours()).padStart(2, '0')}:${String(endDate.getMinutes()).padStart(2, '0')}:${String(endDate.getSeconds()).padStart(2, '0')}`;
+                document.getElementById('end-time').value = `${String(endDate.getHours()).padStart(2, '0')}:${String(endDate.getMinutes()).padStart(2, '0')}:${String(endDate.getSeconds()).padStart(2, '0')}`;
                 
 
                 if (maxTime > 3600) {
@@ -408,8 +422,8 @@
                 }
             } else {
                 document.getElementById('analog-clock').style.background = "none";
-                document.getElementById('start-time').textContent = "";
-                document.getElementById('end-time').textContent = "";
+                document.getElementById('start-time').visibility = "hidden";
+                document.getElementById('end-time').visibility = "hidden";
             }
         }
 
