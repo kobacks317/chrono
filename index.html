@@ -340,6 +340,9 @@
             d.setUTCSeconds(0);
             d.setUTCMilliseconds(0);
             document.getElementById('start-time').valueAsDate = d;
+            if (!running) {
+                running = true;
+            }
             setAnalogClockMarker(true);
             updateClockAndStopwatch();
         });
