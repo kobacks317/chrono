@@ -333,13 +333,14 @@
         });
         document.getElementById('start-time').addEventListener("change", (event) => {
             d = document.getElementById('start-time').valueAsDate;
+            d.setUTCSeconds(0);
+            d.setUTCMilliseconds(0);
+            document.getElementById('start-time').valueAsDate = d;
+            
             startDate.setHours(d.getUTCHours()); 
             startDate.setMinutes(d.getUTCMinutes()); 
             startDate.setSeconds(d.getUTCSeconds()); 
             startDate.setMilliseconds(0);
-            d.setUTCSeconds(0);
-            d.setUTCMilliseconds(0);
-            document.getElementById('start-time').valueAsDate = d;
             if (!running) {
                 running = true;
             }
