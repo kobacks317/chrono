@@ -324,7 +324,7 @@
         document.getElementById('start-time').addEventListener("change", (event) => {
             d = document.getElementById('start-time').valueAsDate;
             startDate.setHours(d.getUTCHours()); 
-            startDate.setMiutes(d.getUTCMinutes()); 
+            startDate.setMinutes(d.getUTCMinutes()); 
             startDate.setSeconds(d.getUTCSeconds()); 
             setAnalogClockMarker(true);
             updateClockAndStopwatch();
