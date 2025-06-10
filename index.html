@@ -307,7 +307,7 @@
                 endDate.setSeconds(endDate.getSeconds() + maxTime);
                 if (now > startDate) {
                     if (countdown) {
-                        if (elapsed <= maxTime) {
+                        if (now <= endDate) {
                             elapsed = (endDate - now) / 1000;
                             sign = "-";
                         } else {
