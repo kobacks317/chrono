@@ -232,13 +232,13 @@
         <div class="timer-detail">
             <table class="timer-detail"><tr>
                 <td style="text-align: left;">
-                    <input id="start-time" type="time" class="time-input" />
+                    <input id="start-time" type="time" class="time-input" style="visibility:hidden;"/>
                 </td>
                 <td style="text-align: center;">
                     <input id="max-time-display" type="time" class="time-input" value="00:15"/>
                 </td>
                 <td style="text-align: right;">
-                    <input id="end-time" type="time" class="time-input" />
+                    <input id="end-time" type="time" class="time-input" style="visibility:hidden;"/>
                 </td>
             </tr></table>
         </div>
@@ -396,8 +396,8 @@
                 }
 
                 
-                document.getElementById('start-time').visibility = "visible";
-                document.getElementById('end-time').visibility = "visible";
+                document.getElementById('start-time').style.visibility = "visible";
+                document.getElementById('end-time').style.visibility = "visible";
 
                 document.getElementById('start-time').value = `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}:${String(startDate.getSeconds()).padStart(2, '0')}`;
 
@@ -422,8 +422,8 @@
                 }
             } else {
                 document.getElementById('analog-clock').style.background = "none";
-                document.getElementById('start-time').visibility = "hidden";
-                document.getElementById('end-time').visibility = "hidden";
+                document.getElementById('start-time').style.visibility = "hidden";
+                document.getElementById('end-time').style.visibility = "hidden";
             }
         }
 
