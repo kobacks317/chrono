@@ -336,6 +336,10 @@
             startDate.setHours(d.getUTCHours()); 
             startDate.setMinutes(d.getUTCMinutes()); 
             startDate.setSeconds(d.getUTCSeconds()); 
+            startDate.setMilliseconds(0);
+            d.setUTCSeconds(0);
+            d.setUTCMilliseconds(0);
+            document.getElementById('start-time').valueAsDate = d;
             setAnalogClockMarker(true);
             updateClockAndStopwatch();
         });
@@ -343,6 +347,7 @@
         function startStopwatch(chrono=false) {
             running = true;
             startDate = new Date();
+            startDate.setMilliseconds(0);
             setAnalogClockMarker(true);
             updateClockAndStopwatch();
             if (chrono) {
