@@ -285,6 +285,7 @@
 
         function updateClockAndStopwatch() {
             const now = new Date();
+            now.setMilliseconds(0);
             const hours = now.getHours() % 12;
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
@@ -299,7 +300,6 @@
             updateChrono();
 
             if (running) {
-                const now = new Date();
                 let elapsed = 0;
                 if (now > startDate) {
                     elapsed = (now - startDate) / 1000;
