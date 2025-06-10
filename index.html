@@ -321,6 +321,14 @@
         document.getElementById('max-time-display').addEventListener("change", (event) => {
             adjustTime(0);
         });
+        document.getElementById('start-time').addEventListener("change", (event) => {
+            d = document.getElementById('start-time').valueAsDate;
+            startDate.setHours(d.getUTCHours()); 
+            startDate.setMiutes(d.getUTCMinutes()); 
+            startDate.setSeconds(d.getUTCSeconds()); 
+            setAnalogClockMarker(true);
+            updateClockAndStopwatch();
+        });
 
         function startStopwatch(chrono=false) {
             running = true;
