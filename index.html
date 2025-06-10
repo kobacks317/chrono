@@ -300,11 +300,12 @@
 
             if (running) {
                 const now = new Date();
+                let elapsed = 0;
                 if (now > startDate) {
-                    let elapsed = (now - startDate) / 1000;
+                    elapsed = (now - startDate) / 1000;
                     stopwatchHours = Math.floor(elapsed/3600);
                 } else {
-                    let elapsed = (startDate - now) / 1000;
+                    elapsed = (startDate - now) / 1000;
                     stopwatchHours = -Math.floor(elapsed/3600);
                 }
                 stopwatchSeconds = Math.floor(elapsed%60);
