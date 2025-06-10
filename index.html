@@ -276,7 +276,7 @@
                 maxTime = Math.max(60, maxTime + minutes * 60);
             }
             document.getElementById('progress-bar').max = maxTime;
-            document.getElementById('max-time-display').value = `${String(Math.floor(maxTime/3600)).padStart(2, '0')}:${String(Math.floor(maxTime/60)).padStart(2, '0')}`;
+            document.getElementById('max-time-display').value = `${String(Math.floor(maxTime/3600)).padStart(2, '0')}:${String(Math.floor(maxTime/60%60).padStart(2, '0')}`;
             if (stopwatchHours == 0 && stopwatchMinutes == 0 && stopwatchSeconds == 0) {
                 startDate = new Date();
             }
