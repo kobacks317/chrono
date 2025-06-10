@@ -305,19 +305,27 @@
                 let sign = "";
                 let endDate = new Date(startDate);
                 endDate.setSeconds(endDate.getSeconds() + maxTime);
-                if (now > startDate) {
+                // if (now > startDate) {
+                if (now - startDate > -1000) {
+                    // タイマー開始後
                     if (countdown) {
-                        if (now <= endDate) {
-                            elapsed = (endDate - now) / 1000;
-                            sign = "-";
-                        } else {
+                        // カウントダウン形式
+                        // if (now <= endDate) {
+                        if (now - endDate > -1000) {
+                            // タイムアップ後
                             elapsed = (now - endDate) / 1000;
                             sign = "+";
+                        } else {
+                            // タイムアップ前
+                            elapsed = (endDate - now) / 1000;
+                            sign = "-";
                         }
                     } else {
+                        // カウントアップ形式
                         elapsed = (now - startDate) / 1000;
                     }
                 } else {
+                    // タイマー開始前
                     elapsed = (startDate - now) / 1000;
                     sign = "-";
                 }
