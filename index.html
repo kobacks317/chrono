@@ -303,18 +303,21 @@
                 let elapsed = 0;
                 if (now > startDate) {
                     elapsed = (now - startDate) / 1000;
-                    stopwatchHours = Math.floor(elapsed/3600);
                 } else {
                     elapsed = (startDate - now) / 1000;
-                    stopwatchHours = -Math.floor(elapsed/3600);
                 }
                 stopwatchSeconds = Math.floor(elapsed%60);
                 stopwatchMinutes = Math.floor(elapsed/60%60);
+                stopwatchHours = Math.floor(elapsed/3600);
 
                 document.getElementById('stopwatch').textContent = 
                     `${String(stopwatchHours).padStart(2, '0')}:${String(stopwatchMinutes).padStart(2, '0')}:${String(stopwatchSeconds).padStart(2, '0')}`;
 
-                if (elapsed <= maxTime) {
+                if (startDate > now) {
+                    document.getElementById('stopwatch').textContent = "-" + document.getElementById('stopwatch').textContent;
+                    document.getElementById('progress-bar').value = 0;
+                    setStopwatchColor("grey");
+                } else if (elapsed <= maxTime) {
                     document.getElementById('progress-bar').value = elapsed;
                     setStopwatchColor("unset");
                 } else {
@@ -431,7 +434,8 @@
 
                 if (maxTime > 3600) {
                     col1 = "lightgrey";
-                } else if (maxTime%3600 == 0) {
+                }
+                if (maxTime%3600 == 0) {
                     col1 = "skyblue";
                     col2 = "black";
                     start = start - 1;
@@ -440,7 +444,6 @@
                 if (start < end) {
                     document.getElementById('analog-clock').style.background = `radial-gradient(circle closest-side, ${bg} 93%, rgba(255, 255, 255, 0) 93%, 100%, rgb(255, 255, 255) 90%), conic-gradient(${col1} 0deg, ${col1} ${start}deg, ${col2} ${start}deg, ${col2} ${end}deg, ${col1} ${end}deg)`;
                 } else {
-                    console.log("reversed");
                     document.getElementById('analog-clock').style.background = `radial-gradient(circle closest-side, ${bg} 93%, rgba(255, 255, 255, 0) 93%, 100%, rgb(255, 255, 255) 90%), conic-gradient(${col2} 0deg, ${col2} ${end}deg, ${col1} ${end}deg, ${col1} ${start}deg, ${col2} ${start}deg)`;
                 }
             } else {
