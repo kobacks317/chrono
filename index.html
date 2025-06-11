@@ -336,17 +336,23 @@
                 document.getElementById('stopwatch').textContent = 
                     `${sign} ${String(stopwatchHours).padStart(2, '0')}:${String(stopwatchMinutes).padStart(2, '0')}:${String(stopwatchSeconds).padStart(2, '0')}`;
 
-                if (startDate > now) {
+                if (now - startDate <= -1000) {
+                    // タイマー開始前
                     document.getElementById('progress-bar').value = 0;
                     setStopwatchColor("grey");
-                } else if (elapsed <= maxTime) {
+                } else if (now - endDate <= -1000) {
+                    // タイマー開始後
+                    // タイムアップ前
                     if (countdown) {
+                        // カウントダウン
                         document.getElementById('progress-bar').value = maxTime - elapsed;
                     } else {
+                        // カウントアップ
                         document.getElementById('progress-bar').value = elapsed;
                     }
                     setStopwatchColor("unset");
                 } else {
+                    // タイムアップ後
                     document.getElementById('progress-bar').value = maxTime;
                     setStopwatchColor("red");
                 }
