@@ -3,6 +3,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
     
 <body>
@@ -244,12 +245,22 @@
         </div>
 
         <div class="button-container">
-            <button onclick="startStopwatch(true)">&gt;&gt;</button>
-            <button onclick="stopStopwatch()">&gt;||</button>
-            <button onclick="resetStopwatch()">↻</button>
+            <button onclick="startStopwatch(true)">
+                <span class="material-symbols-outlined">play_arrow</span>
+            </button>
+            <button onclick="stopStopwatch()">
+                <span class="material-symbols-outlined">play_pause</span>
+            </button>
+            <button onclick="resetStopwatch()">
+                <span class="material-symbols-outlined">replay</span>
+            </button>
             <div class="adjust-buttons">
-                <button class="small-button" onclick="adjustTime(5)">+</button>
-                <button class="small-button" onclick="adjustTime(-5)" style="border-top:none;font-size:15px">-</button>
+                <button class="small-button" onclick="adjustTime(5)">
+                    <span class="material-symbols-outlined">add</span>
+                </button>
+                <button class="small-button" onclick="adjustTime(-5)" style="border-top:none;">
+                    <span class="material-symbols-outlined">remove</span>
+                </button>
             </div>
         </div>
     </div>
