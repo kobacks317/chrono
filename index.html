@@ -16,6 +16,7 @@
         }
         html, body {
             overflow: hidden; /* スクロールを無効にする */
+            -webkit-text-size-adjust: auto;
         }
         .chrono {
             font-family: Arial, sans-serif;
@@ -223,7 +224,7 @@
         </div>
     </div>
 
-    <span class="column">
+    <div class="column">
         <div class="clock" id="clock">00:00:00</div>
         <div class="stopwatch" id="stopwatch" onclick="toggleCountdown()">00:00:00</div>
         
@@ -243,7 +244,7 @@
                     <input id="end-time" type="time" class="time-input" style="visibility:hidden;" readonly=true/>
                 </td>
             </tr></table>
-        </span>
+        </div>
 
         <div class="button-container">
             <button onclick="startStopwatch(true)">
