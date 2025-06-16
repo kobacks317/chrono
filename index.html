@@ -516,7 +516,7 @@
         }
 
         function pip() {
-            const pipWindow = await documentPictureInPicture.requestWindow();
+            const pipWindow = documentPictureInPicture.requestWindow();
             const c = document.getElementById("chrono").cloneNode(true);
             pipWindow.document.body.append(c);
         }
