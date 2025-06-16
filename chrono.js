@@ -248,7 +248,7 @@ async function pip() {
     pipWindow.document.body.append(c);
 
     const script = pipWindow.document.createElement("script");
-    script.src = "main.js";
+    script.src = "chrono.js";
     pipWindow.document.body.appendChild(script);
 }
 
