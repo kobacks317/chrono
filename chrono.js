@@ -246,6 +246,10 @@ async function pip() {
     const pipWindow = await documentPictureInPicture.requestWindow();
     const c = document.getElementById("chrono").cloneNode(true);
     pipWindow.document.body.append(c);
+
+    const script = pipWindow.document.createElement("script");
+    script.src = "main.js";
+    pipWindow.document.body.appendChild(script);
 }
 
 function init() {
