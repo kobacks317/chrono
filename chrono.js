@@ -243,7 +243,10 @@ function adjustZoom() {
 }
 
 async function pip() {
-    const pipWindow = await documentPictureInPicture.requestWindow();
+    const pipWindow = await documentPictureInPicture.requestWindow({
+        width: 200,
+        height: 400
+    });
     const c = document.getElementById("chrono").cloneNode(true);
     pipWindow.document.body.append(c);
 
