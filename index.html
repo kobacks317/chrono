@@ -372,26 +372,7 @@
             }
         }
 
-        setInterval(updateClockAndStopwatch, 1000);
-        document.getElementById('max-time-display').addEventListener("change", (event) => {
-            adjustTime(0);
-        });
-        document.getElementById('start-time').addEventListener("change", (event) => {
-            d = document.getElementById('start-time').valueAsDate;
-            d.setUTCSeconds(0);
-            d.setUTCMilliseconds(0);
-            document.getElementById('start-time').valueAsDate = d;
-            
-            startDate.setHours(d.getUTCHours()); 
-            startDate.setMinutes(d.getUTCMinutes()); 
-            startDate.setSeconds(d.getUTCSeconds()); 
-            startDate.setMilliseconds(0);
-            if (!running) {
-                running = true;
-            }
-            setAnalogClockMarker(true);
-            updateClockAndStopwatch();
-        });
+
 
         function startStopwatch(chrono=false) {
             running = true;
@@ -531,8 +512,38 @@
             document.getElementById('chrono').style.zoom = `${scaleFactor}`;
         }
 
-        window.addEventListener('resize', adjustZoom);
-        window.addEventListener('load', adjustZoom);
+        function pip() {
+            const pipWindow = await documentPictureInPicture.requestWindow();
+            const c = document.getElementById("chrono").cloneNode(true);
+            pipWindow.document.body.append(c);
+        }
+
+        function init() {
+            setInterval(updateClockAndStopwatch, 1000);
+            document.getElementById('max-time-display').addEventListener("change", (event) => {
+                adjustTime(0);
+            });
+            document.getElementById('start-time').addEventListener("change", (event) => {
+                d = document.getElementById('start-time').valueAsDate;
+                d.setUTCSeconds(0);
+                d.setUTCMilliseconds(0);
+                document.getElementById('start-time').valueAsDate = d;
+                
+                startDate.setHours(d.getUTCHours()); 
+                startDate.setMinutes(d.getUTCMinutes()); 
+                startDate.setSeconds(d.getUTCSeconds()); 
+                startDate.setMilliseconds(0);
+                if (!running) {
+                    running = true;
+                }
+                setAnalogClockMarker(true);
+                updateClockAndStopwatch();
+            });
+            window.addEventListener('resize', adjustZoom);
+            window.addEventListener('load', adjustZoom);
+        }
+
+        init();
 
 
     </script>
