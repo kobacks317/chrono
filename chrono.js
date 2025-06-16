@@ -253,6 +253,9 @@ async function pip() {
 }
 
 function init() {
+    if (!document.pictureInPictureEnabled) {
+        document.getElementById("pip-button").remove();
+    }
     setInterval(updateClockAndStopwatch, 1000);
     document.getElementById('max-time-display').addEventListener("change", (event) => {
         adjustTime(0);
