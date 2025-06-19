@@ -156,7 +156,7 @@ function resetStopwatch() {
 
 function startChrono(force=false) {
      if (chronoRunning) {
-         let elapsed = (new Date().setMiliseconds(0) - chronoDate) / 1000;
+         let elapsed = (new Date().setMilliseconds(0) - chronoDate) / 1000;
          document.getElementById('chronoRec').innerText += `${String(Math.floor(elapsed/60%60)).padStart(2, '0')}:${String(Math.floor(elapsed%60)).padStart(2, '0')}`;
      }
      if (chronoRunning && !force) {
