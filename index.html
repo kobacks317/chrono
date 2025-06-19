@@ -199,6 +199,7 @@
                     }
                     .guage {
                         background: radial-gradient(circle closest-side, rgb(10,10,10) 90%, transparent 90%),repeating-conic-gradient(white 0deg 1deg, transparent 1deg 29deg, white 20deg 30deg);
+                        text-align: right;
                     }
                     .center {
                         background: white;
@@ -214,7 +215,7 @@
         
             <div class="column">
                 <div class="analog-clock" id="analog-clock" onclick="startChrono()">
-                    <div class="guage"></div>
+                    <div class="guage" id="guage"></div>
                     <div class="secChrono" id="secChrono"></div>
                     <div class="hand" id="stopwatch-second-hand" style="height: 0.5px;"></div>
                     <div class="hand" id="second-hand"  style="height: 1px;"></div>
