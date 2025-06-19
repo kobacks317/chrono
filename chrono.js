@@ -152,6 +152,9 @@ function resetStopwatch() {
     document.getElementById('chronoRec').innerHTML = "";
     setAnalogClockMarker(false);
     setStopwatchColor("grey");
+    if (chronoRunning) {
+        startChrono();
+    }
 }
 
 function startChrono(force=false) {
