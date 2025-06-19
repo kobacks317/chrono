@@ -162,6 +162,7 @@ function startChrono(force=false) {
      if (chronoRunning) {
          let elapsed = (new Date().setMilliseconds(0) - chronoDate) / 1000;
          document.getElementById('chronoRec').innerHTML += `${String(Math.floor(elapsed/60%60)).padStart(2, ' ')}:${String(Math.floor(elapsed%60)).padStart(2, '0')}`;
+         document.getElementById('chronoRec').scrollTop = document.getElementById('chronoRec').scrollHeight;
      }
      if (chronoRunning && !force) {
          chronoRunning = false;
