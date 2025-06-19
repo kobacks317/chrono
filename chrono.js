@@ -149,11 +149,12 @@ function resetStopwatch() {
     document.getElementById('stopwatch').textContent = "00:00:00";
     document.getElementById('progress-bar').value = 0;
     document.getElementById('guage').textContent = "";
-    document.getElementById('chronoRec').innerHTML = "";
     setAnalogClockMarker(false);
     setStopwatchColor("grey");
     if (chronoRunning) {
         startChrono();
+    } else {
+        document.getElementById('chronoRec').innerHTML = "";
     }
 }
 
