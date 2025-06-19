@@ -187,6 +187,11 @@
                     overflow: scroll;
                     scrollbar-width: none;
                 }
+                #counter {
+                    position: absolute;
+                    left: 90%;
+                    width: 40px;
+                }
         
                 @media (prefers-color-scheme: dark) {
                     /* このなかにダークモード時のスタイルを記述します */
@@ -232,6 +237,7 @@
                     <div class="hand-bold" id="hour-hand" style="height: 4px; width: 30%;"></div>
                     <div class="center"></div>
                     <code class="chronoRec" id="chronoRec"></code>
+                    <input id="counter" type="number"></input>
                 </div>
             </div>
         
