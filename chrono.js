@@ -149,7 +149,7 @@ function resetStopwatch() {
     document.getElementById('stopwatch').textContent = "00:00:00";
     document.getElementById('progress-bar').value = 0;
     document.getElementById('guage').textContent = "";
-    document.getElementById('chronoRec').innerText = "";
+    document.getElementById('chronoRec').innerHTML = "";
     setAnalogClockMarker(false);
     setStopwatchColor("grey");
 }
@@ -157,7 +157,7 @@ function resetStopwatch() {
 function startChrono(force=false) {
      if (chronoRunning) {
          let elapsed = (new Date().setMilliseconds(0) - chronoDate) / 1000;
-         document.getElementById('chronoRec').innerText += ` ${String(Math.floor(elapsed/60%60)).padStart(2, '0')}:${String(Math.floor(elapsed%60)).padStart(2, '0')}`;
+         document.getElementById('chronoRec').innerHTML += `${String(Math.floor(elapsed/60%60)).padStart(2, '0')}:${String(Math.floor(elapsed%60)).padStart(2, '0')}`;
      }
      if (chronoRunning && !force) {
          chronoRunning = false;
@@ -166,7 +166,7 @@ function startChrono(force=false) {
          chronoDate = new Date();
          chronoDate.setMilliseconds(0);
          document.getElementById('guage').textContent = Number(document.getElementById('guage').textContent) + 1;
-         document.getElementById('chronoRec').innerText += "\n" + String(document.getElementById('guage').textContent).padStart(2, '&nbsp;') + ": ";
+         document.getElementById('chronoRec').innerHTML += "<br>" + String(document.getElementById('guage').textContent).padStart(2, '&nbsp;') + ":&nbsp;&nbsp;";
          document.getElementById('chronoRec').scrollTop = document.getElementById('chronoRec').scrollHeight;
          chronoRunning = true;
          updateChrono();
