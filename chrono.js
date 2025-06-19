@@ -149,15 +149,15 @@ function resetStopwatch() {
     document.getElementById('stopwatch').textContent = "00:00:00";
     document.getElementById('progress-bar').value = 0;
     document.getElementById('guage').textContent = "";
-    document.getElementById('chronoRec').textContent = "";
+    document.getElementById('chronoRec').innerText = "";
     setAnalogClockMarker(false);
     setStopwatchColor("grey");
 }
 
 function startChrono(force=false) {
      if (chronoRunning) {
-         let elapsed = (chronoDate - new Date().setMiliseconds(0)) / 1000;
-         document.getElementById('chronoRec').textContent += `${String(Math.floor(elapsed/60%60)).padStart(2, '0')}:${String(Math.floor(elapsed%60)).padStart(2, '0')}`;
+         let elapsed = (new Date().setMiliseconds(0) - chronoDate) / 1000;
+         document.getElementById('chronoRec').innerText += `${String(Math.floor(elapsed/60%60)).padStart(2, '0')}:${String(Math.floor(elapsed%60)).padStart(2, '0')}`;
      }
      if (chronoRunning && !force) {
          chronoRunning = false;
@@ -166,7 +166,7 @@ function startChrono(force=false) {
          chronoDate = new Date();
          chronoDate.setMilliseconds(0);
          document.getElementById('guage').textContent = Number(document.getElementById('guage').textContent) + 1;
-         document.getElementById('chronoRec').textContent += "\n" + document.getElementById('guage').textContent + "\t";
+         document.getElementById('chronoRec').innerText += "\n" + document.getElementById('guage').textContent + "\t";
          chronoRunning = true;
          updateChrono();
      }
