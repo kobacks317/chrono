@@ -148,6 +148,7 @@ function resetStopwatch() {
     stopwatchHours = 0;
     document.getElementById('stopwatch').textContent = "00:00:00";
     document.getElementById('progress-bar').value = 0;
+    document.getElementById('guage').textContent = "";
     setAnalogClockMarker(false);
     setStopwatchColor("grey");
 }
@@ -159,6 +160,7 @@ function startChrono(force=false) {
      } else {
          chronoDate = new Date();
          chronoDate.setMilliseconds(0);
+         document.getElementById('guage').textContent = Number(document.getElementById('guage').textContent) + 1;
          chronoRunning = true;
          updateChrono();
      }
