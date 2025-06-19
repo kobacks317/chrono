@@ -149,11 +149,17 @@ function resetStopwatch() {
     document.getElementById('stopwatch').textContent = "00:00:00";
     document.getElementById('progress-bar').value = 0;
     document.getElementById('guage').textContent = "";
+    document.getElementById('chronoRec').textContent = "";
     setAnalogClockMarker(false);
     setStopwatchColor("grey");
 }
 
 function startChrono(force=false) {
+     if (chronoRunning) {
+         let c = chronoDate - new Date();
+         c.setMiliseconds(0);
+         document.getElementById('chronoRec').textContent += `${String(c.getMinutes()).padStart(2, '0')}:${String(c.getSeconds()).padStart(2, '0')}`;
+     }
      if (chronoRunning && !force) {
          chronoRunning = false;
          updateChrono();
@@ -161,6 +167,7 @@ function startChrono(force=false) {
          chronoDate = new Date();
          chronoDate.setMilliseconds(0);
          document.getElementById('guage').textContent = Number(document.getElementById('guage').textContent) + 1;
+         document.getElementById('chronoRec').textContent += "\n" + document.getElementById('guage').textContent + "\t";
          chronoRunning = true;
          updateChrono();
      }
