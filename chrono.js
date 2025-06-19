@@ -166,7 +166,7 @@ function startChrono(force=false) {
          chronoDate = new Date();
          chronoDate.setMilliseconds(0);
          document.getElementById('guage').textContent = Number(document.getElementById('guage').textContent) + 1;
-         document.getElementById('chronoRec').innerHTML += "<br>" + String(document.getElementById('guage').textContent).padStart(2, ' ') + ": ";
+         document.getElementById('chronoRec').innerHTML += "<br>&gt;" + String(document.getElementById('guage').textContent).padStart(2, ' ') + ": ";
          document.getElementById('chronoRec').scrollTop = document.getElementById('chronoRec').scrollHeight;
          chronoRunning = true;
          updateChrono();
