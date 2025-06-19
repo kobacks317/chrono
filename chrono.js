@@ -148,7 +148,7 @@ function resetStopwatch() {
     stopwatchHours = 0;
     document.getElementById('stopwatch').textContent = "00:00:00";
     document.getElementById('progress-bar').value = 0;
-    document.getElementById('guage').textContent = "";
+    document.getElementById('counter').value = "";
     setAnalogClockMarker(false);
     setStopwatchColor("grey");
     if (chronoRunning) {
@@ -169,8 +169,8 @@ function startChrono(force=false) {
      } else {
          chronoDate = new Date();
          chronoDate.setMilliseconds(0);
-         document.getElementById('guage').textContent = Number(document.getElementById('guage').textContent) + 1;
-         document.getElementById('chronoRec').innerHTML += "<br>&gt;" + String(document.getElementById('guage').textContent).padStart(2, ' ') + ": ";
+         document.getElementById('counter').value = Number(document.getElementById('counter').value) + 1;
+         document.getElementById('chronoRec').innerHTML += "<br>&gt;" + String(document.getElementById('counter').value).padStart(2, ' ') + ": ";
          document.getElementById('chronoRec').scrollTop = document.getElementById('chronoRec').scrollHeight;
          chronoRunning = true;
          updateChrono();
