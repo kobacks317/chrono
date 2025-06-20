@@ -172,7 +172,7 @@ function startChrono(force=false) {
          chronoDate = new Date();
          chronoDate.setMilliseconds(0);
          document.getElementById('counter').value = Number(document.getElementById('counter').value) + 1;
-         document.getElementById('chronoRec').innerHTML += "<br>&gt;" + String(document.getElementById('counter').value).padStart(2, ' ') + ": ";
+         document.getElementById('chronoRec').innerHTML += "<br>&gt;" + String(document.getElementById('counter').value).padStart(2, ' ') + ":&nbsp;";
          document.getElementById('chronoRec').scrollTop = document.getElementById('chronoRec').scrollHeight;
          chronoRunning = true;
          updateChrono();
