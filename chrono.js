@@ -8,6 +8,7 @@ let startDate = new Date();
 let pauseDate = new Date();
 let chronoDate = new Date();
 let maxTime = 900;
+let i;
 
 function adjustTime(minutes) {
     if (minutes == 0) {
@@ -175,6 +176,8 @@ function startChrono(force=false) {
          document.getElementById('chronoRec').scrollTop = document.getElementById('chronoRec').scrollHeight;
          chronoRunning = true;
          updateChrono();
+         clearInterval(i);
+         i = setInterval(updateClockAndStopwatch, 1000);
      }
 }
 
@@ -273,7 +276,7 @@ function init() {
     if (!document.pictureInPictureEnabled) {
         document.getElementById("pip-button").remove();
     }
-    setInterval(updateClockAndStopwatch, 1000);
+    i = setInterval(updateClockAndStopwatch, 1000);
     document.getElementById('max-time-display').addEventListener("change", (event) => {
         adjustTime(0);
     });
