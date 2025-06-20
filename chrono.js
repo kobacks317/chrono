@@ -176,6 +176,7 @@ function startChrono(force=false) {
          document.getElementById('chronoRec').scrollTop = document.getElementById('chronoRec').scrollHeight;
          chronoRunning = true;
          updateChrono();
+         updateClockAndStopwatch();
          clearInterval(i);
          i = setInterval(updateClockAndStopwatch, 1000);
      }
